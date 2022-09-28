@@ -1,12 +1,11 @@
-import type { NextPage } from 'next'
+import { Button } from '@mui/material'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import {Button} from "@mui/material";
+import type { NextPage } from 'next'
 
 const Home: NextPage = () => {
   return (
-
     <div className={styles.container}>
       <Button variant="text">Text</Button>
       <Button variant="contained">Contained</Button>
