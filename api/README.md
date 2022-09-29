@@ -1,0 +1,1 @@
+http://localhost:5001/milk-treasurer/us-central1/graphql
