@@ -5,15 +5,24 @@ export const typeDefs: DocumentNode = gql`
   """
   ミスチル
   """
-  type Test {
-    name: String!
+  type User {
+    id: String
+    name: String
+    email: String
   }
 
   type Query {
-    users: [Test]
+    users: [User]
   }
 
+  input CreateUserInput {
+    name: String!
+    email: String!
+  }
+
+
   type Mutation {
-    addTest(text: String!): Test
+    addTest(text: String!): User
+    createUser(input: CreateUserInput!): User
   }
 `

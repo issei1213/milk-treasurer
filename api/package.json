@@ -9,7 +9,9 @@
     "shell": "yarn build && firebase functions:shell",
     "start": "yarn shell",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "multi": "yarn watch & yarn serve"
+
   },
   "engines": {
     "node": "16"

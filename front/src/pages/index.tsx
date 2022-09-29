@@ -1,10 +1,16 @@
+import { useQuery } from '@apollo/client'
+import { Button } from '@mui/material'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import type { NextPage } from 'next'
-import { Button } from '@mui/material'
+import { GET_USER, UserList } from '~/graphql/query/getUser.query'
 
 const Home: NextPage = () => {
+  const { data } = useQuery<UserList>(GET_USER)
+
+  console.log(data)
+
   return (
     <div className={styles.container}>
       <Button variant="text">Text</Button>
