@@ -1,6 +1,9 @@
 import '../styles/globals.css'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import type { AppProps } from 'next/app'
+import CssBaseline from '@mui/material/CssBaseline'
+import { ThemeProvider } from '@mui/material'
+import { theme } from '~/theme'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const cache = new InMemoryCache()
@@ -12,7 +15,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ApolloProvider client={client}>
-      <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
     </ApolloProvider>
   )
 }
