@@ -6,6 +6,8 @@ import { TextField, Typography } from '@mui/material'
 import { Button } from '~/components/ui/Button'
 
 import { Head } from '~/components/ui/Head'
+import { InputWithLabel } from '~/components/ui/Input'
+import { grey } from '@mui/material/colors'
 
 const Login: FC = () => {
   return (
@@ -15,7 +17,7 @@ const Login: FC = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '80vh',
+        height: '90vh',
       }}
     >
       <Box
@@ -27,7 +29,7 @@ const Login: FC = () => {
         <Box component="div">
           <Image src="/logo.png" width={200} height={150} objectFit="contain" />
         </Box>
-        <Typography variant="h5" marginBottom="28px">
+        <Typography variant="h5" marginBottom="32px">
           管理画面
         </Typography>
 
@@ -38,11 +40,9 @@ const Login: FC = () => {
           alignItems="center"
           gap="16px"
           width={'100%'}
-          marginBottom="16px"
+          marginBottom="32px"
         >
-          <Typography variant="h6" marginBottom="16px">
-            ログイン
-          </Typography>
+          <Typography variant="h6">ログイン</Typography>
           <Box
             component="form"
             width="100%"
@@ -51,21 +51,18 @@ const Login: FC = () => {
             alignItems="center"
             gap="16px"
           >
-            <TextField
+            <InputWithLabel
               id="email"
+              title="メールアドレス"
+              required={true}
               type="email"
-              label="メールアドレス"
-              InputLabelProps={{ shrink: true }}
-              required={true}
-              fullWidth={true}
+              error={true}
             />
-            <TextField
+            <InputWithLabel
               id="password"
-              type="password"
-              label="パスワード"
-              InputLabelProps={{ shrink: true }}
+              title="パスワード"
               required={true}
-              fullWidth={true}
+              type="password"
             />
           </Box>
         </Box>

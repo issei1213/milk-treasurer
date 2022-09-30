@@ -5,8 +5,6 @@ export const MuiButton: Components['MuiButton'] = {
   styleOverrides: {
     // primary
     containedPrimary: ({ theme }) => {
-      // const theme = params.theme.common.white as Record<string, string>
-
       return {
         background: blue[500],
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
