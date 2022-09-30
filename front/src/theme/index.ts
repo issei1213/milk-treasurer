@@ -1,11 +1,18 @@
 import { createTheme } from '@mui/material'
-
-import { MuiButton, MuiTypography } from './components'
+import {
+  MuiButton,
+  MuiInputLabel,
+  MuiOutlinedInput,
+  MuiTypography,
+} from './components'
+import { blue, grey, red } from '@mui/material/colors'
 
 export const theme = createTheme({
   components: {
-    MuiTypography,
     MuiButton,
+    MuiInputLabel,
+    MuiTypography,
+    MuiOutlinedInput,
   },
   breakpoints: {
     values: {
@@ -18,5 +25,10 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: 'BIZ UDPGothic, sans-serif',
+  },
+  palette: {
+    background: {
+      default: grey[50],
+    },
   },
 })
