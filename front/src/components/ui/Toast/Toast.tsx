@@ -18,7 +18,7 @@ export const Toast: FC<Props> = memo(({ open, onClose, message, type }) => {
       open={open}
       autoHideDuration={6000}
       onClose={onClose}
-      key={Math.random()}
+      key={Math.random()} // NOTE: ここの値をランダムにすることで、非表示のタイミングで綺麗にアニメーションがかかる
       sx={{ maxWidth: '80%', width: '100%' }}
     >
       <Alert onClose={onClose} sx={{ width: '100%' }} severity={type}>
