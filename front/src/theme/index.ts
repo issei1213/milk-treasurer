@@ -1,11 +1,11 @@
 import { createTheme } from '@mui/material'
+import { grey } from '@mui/material/colors'
 import {
   MuiButton,
   MuiInputLabel,
   MuiOutlinedInput,
   MuiTypography,
 } from './components'
-import { blue, grey, red } from '@mui/material/colors'
 
 export const theme = createTheme({
   components: {

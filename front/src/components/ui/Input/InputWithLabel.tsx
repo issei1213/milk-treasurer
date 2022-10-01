@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from 'react'
-import { memo } from 'react'
+import { memo, forwardRef } from 'react'
 import {
   Box,
   InputLabel,
@@ -9,7 +9,10 @@ import {
 import { useTheme } from '@mui/material'
 import { red } from '@mui/material/colors'
 
-type InputWithLabel = OutlinedInputProps
+type InputWithLabel = OutlinedInputProps & {
+  errormessage?: string
+  children?: ReactNode
+}
 type InputErrorMessage = {
   children: ReactNode
 }
@@ -48,31 +51,36 @@ const InputErrorMessage: FC<InputErrorMessage> = ({ children }) => {
   )
 }
 
-export const InputWithLabel: FC<InputWithLabel> = memo((props) => {
-  return (
-    <Box
-      component="div"
-      display="flex"
-      flexDirection="column"
-      gap="8px"
-      maxWidth="311px"
-      width="100%"
-    >
+export const InputWithLabel = memo(
+  forwardRef<HTMLInputElement, InputWithLabel>((props, ref) => {
+    return (
       <Box
         component="div"
         display="flex"
-        flexDirection="row"
-        alignItems="center"
-        gap="8px"
+        flexDirection="column"
+        maxWidth="311px"
+        width="100%"
       >
-        <InputLabel htmlFor={props.id}>{props.title}</InputLabel>
-        {props.required && <LabelBadge />}
+        <Box
+          component="div"
+          display="flex"
+          flexDirection="row"
+          alignItems="center"
+          gap="8px"
+          marginBottom="8px"
+        >
+          <InputLabel htmlFor={props.id}>{props.title}</InputLabel>
+          {props.required && <LabelBadge />}
+        </Box>
+        <OutlinedInput {...props} required={false} ref={ref} />
+        {props.errormessage && (
+          <InputErrorMessage>{props.errormessage}</InputErrorMessage>
+        )}
+        {props.children}
       </Box>
-      <OutlinedInput {...props} />
-      {props.error && <InputErrorMessage>エラーが起きました</InputErrorMessage>}
-    </Box>
-  )
-})
+    )
+  }),
+)
 
 LabelBadge.displayName = 'LabelBadge'
 InputWithLabel.displayName = 'InputWithLabel'
