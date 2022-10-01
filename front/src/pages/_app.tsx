@@ -18,11 +18,8 @@ const AuthInit: FC<AuthInitProps> = () => {
 
   useEffect(() => {
     const authChanged = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        await push({
-          pathname: '/teams',
-        })
-      } else {
+      // ログインしていない場合は、ログイン画面へ遷移
+      if (!user) {
         await push({
           pathname: '/login',
         })
