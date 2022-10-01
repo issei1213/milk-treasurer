@@ -29,7 +29,7 @@ const AuthInit: FC<AuthInitProps> = () => {
     return () => {
       authChanged()
     }
-  }, [])
+  }, [auth, push])
 
   return null
 }
