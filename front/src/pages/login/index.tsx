@@ -1,18 +1,19 @@
-import { NextPage } from 'next'
 import type { FC } from 'react'
+import { Typography, Box, Container } from '@mui/material'
 import Image from 'next/image'
-import { Box, Container } from '@mui/system'
-import { TextField, Typography } from '@mui/material'
+import type { NextPage } from 'next'
+import { LoginForm } from '~/components/model/auth'
 import { Button } from '~/components/ui/Button'
-
 import { Head } from '~/components/ui/Head'
-import { InputWithLabel } from '~/components/ui/Input'
-import { grey } from '@mui/material/colors'
+import { useLogin } from '~/hooks/pages/useLogin'
 
 const Login: FC = () => {
+  const { control, handleSubmit, onSubmit, isShowPassword, setIsShowPassword } =
+    useLogin()
+
   return (
     <Container
-      maxWidth="sm"
+      maxWidth="md"
       sx={{
         display: 'flex',
         justifyContent: 'center',
@@ -25,6 +26,7 @@ const Login: FC = () => {
         flexDirection="column"
         alignItems="center"
         width="100%"
+        onSubmit={handleSubmit(onSubmit)}
       >
         <Box component="div">
           <Image src="/logo.png" width={200} height={150} objectFit="contain" />
@@ -39,42 +41,39 @@ const Login: FC = () => {
           flexDirection="column"
           alignItems="center"
           gap="16px"
-          width={'100%'}
-          marginBottom="32px"
+          width="100%"
         >
           <Typography variant="h6">ログイン</Typography>
           <Box
             component="form"
-            width="100%"
             display="flex"
             flexDirection="column"
             alignItems="center"
             gap="16px"
+            width="100%"
           >
-            <InputWithLabel
-              id="email"
-              title="メールアドレス"
-              required={true}
-              type="email"
-              error={true}
+            <LoginForm
+              control={control}
+              isShowPassword={isShowPassword}
+              onChangePasswordCheckbox={() =>
+                setIsShowPassword(!isShowPassword)
+              }
             />
-            <InputWithLabel
-              id="password"
-              title="パスワード"
-              required={true}
-              type="password"
-            />
+
+            <Box component="div" marginTop="16px">
+              <Button
+                color="primary"
+                variant={'contained'}
+                size="large"
+                type="submit"
+                disabled={false}
+                loading={false}
+              >
+                ログイン
+              </Button>
+            </Box>
           </Box>
         </Box>
-        <Button
-          color="primary"
-          variant={'contained'}
-          size="large"
-          disabled={false}
-          loading={false}
-        >
-          ログイン
-        </Button>
       </Box>
     </Container>
   )
