@@ -48,7 +48,7 @@ export const LoginForm: FC<Props> = memo(
               {...field}
             >
               <FormControlLabel
-                control={<Checkbox defaultChecked checked={isShowPassword} />}
+                control={<Checkbox checked={isShowPassword} />}
                 label="パスワードを表示する"
                 onChange={onChangePasswordCheckbox}
               />
