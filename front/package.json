@@ -9,6 +9,7 @@
     "lint": "next lint",
     "test": "jest",
     "type:check": "tsc --pretty --noEmit",
+    "format": "prettier --write \"./**/*.{js,jsx,ts,tsx}\"",
     "format:check": "prettier --check \"./**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
