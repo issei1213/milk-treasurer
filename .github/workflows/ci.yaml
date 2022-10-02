@@ -16,7 +16,7 @@ jobs:
         run: |
           yarn cache clean
           yarn install --network-concurrency 1
-        working-directory: ./functions
+        working-directory: ./front
       - run: yarn lint
       - run: yarn type:check
       - run: yarn format:check
