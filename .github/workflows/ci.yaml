@@ -12,10 +12,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.15.0
-      - name: cd front && yarn install
+      - name: yarn install
         run: |
           yarn cache clean
           yarn install --network-concurrency 1
+        working-directory: ./functions
       - run: yarn lint
       - run: yarn type:check
       - run: yarn format:check
