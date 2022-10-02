@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from 'react'
 import { memo } from 'react'
-import { ButtonProps as MuiButtonProps, Box, SvgIcon } from '@mui/material'
+import { ButtonProps as MuiButtonProps, Box } from '@mui/material'
 import { Button as MuiButton } from '@mui/material'
 import CircularProgress from '@mui/material/CircularProgress'
 import { useTheme } from '@mui/material/styles'
@@ -21,11 +21,6 @@ type StartIconWithLoadingProps = {
   size?: 'small' | 'medium' | 'large'
   color?: 'primary'
   icon?: ReactNode
-}
-
-type EndIconWrapperProps = {
-  icon: typeof SvgIcon
-  size: 'small' | 'medium' | 'large'
 }
 
 // FIX: 今後使うかもしれないので、一旦保留

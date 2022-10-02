@@ -41,6 +41,7 @@ const Login: FC = () => {
           <Box component="div">
             <Image
               src="/logo.png"
+              alt=""
               width={200}
               height={150}
               objectFit="contain"

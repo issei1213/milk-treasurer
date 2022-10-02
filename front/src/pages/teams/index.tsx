@@ -13,44 +13,44 @@ import { BaseLayout } from '~/components/model/layout'
 import { Button } from '~/components/ui/Button'
 import { Head } from '~/components/ui/Head'
 
-interface Column {
+type Column = {
   id: 'name' | 'countMember' | 'updateAt' | 'buttonGroup'
   label: string
   minWidth?: number
   align?: 'right' | 'center' | 'left'
 }
 
+const COLUMN_LIST: Column[] = [
+  { id: 'name', label: '名前', minWidth: 170, align: 'center' },
+  { id: 'countMember', label: 'メンバー数', minWidth: 100, align: 'center' },
+  { id: 'updateAt', label: '最終更新日', minWidth: 170, align: 'center' },
+  { id: 'buttonGroup', label: '', minWidth: 100, align: 'center' },
+]
+
+const ROW_LIST = [
+  {
+    id: '1',
+    name: 'Aチームメンバー',
+    countMember: 30,
+    updateAt: '2020/12/31 18:00',
+  },
+  {
+    id: '2',
+    name: 'Bチームメンバー',
+    countMember: 10,
+    updateAt: '2020/12/31 18:00',
+  },
+  {
+    id: '3',
+    name: 'Cチームメンバー',
+    countMember: 9,
+    updateAt: '2020/12/31 18:00',
+  },
+]
+
 const Teams: FC = () => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
-
-  const columns: readonly Column[] = [
-    { id: 'name', label: '名前', minWidth: 170, align: 'center' },
-    { id: 'countMember', label: 'メンバー数', minWidth: 100, align: 'center' },
-    { id: 'updateAt', label: '最終更新日', minWidth: 170, align: 'center' },
-    { id: 'buttonGroup', label: '', minWidth: 100, align: 'center' },
-  ]
-
-  const rows = [
-    {
-      id: '1',
-      name: 'Aチームメンバー',
-      countMember: 30,
-      updateAt: '2020/12/31 18:00',
-    },
-    {
-      id: '2',
-      name: 'Bチームメンバー',
-      countMember: 10,
-      updateAt: '2020/12/31 18:00',
-    },
-    {
-      id: '3',
-      name: 'Cチームメンバー',
-      countMember: 9,
-      updateAt: '2020/12/31 18:00',
-    },
-  ]
 
   return (
     <>
@@ -63,7 +63,7 @@ const Teams: FC = () => {
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  {columns.map((column) => (
+                  {COLUMN_LIST.map((column) => (
                     <>
                       <TableCell
                         key={column.id}
@@ -81,10 +81,10 @@ const Teams: FC = () => {
               </TableHead>
               <TableBody>
                 {/* 一行毎 */}
-                {rows.map((row, index) => {
+                {ROW_LIST.map((row, index) => {
                   return (
                     <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                      {columns.map((column) => {
+                      {COLUMN_LIST.map((column) => {
                         // カラムの内容からrowsのどの値かを取り出す
                         const value = row[column.id]
 
