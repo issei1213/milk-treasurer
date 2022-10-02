@@ -85,11 +85,11 @@ const Teams: FC = () => {
                   return (
                     <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                       {COLUMN_LIST.map((column) => {
-                        // カラムの内容からrowsのどの値かを取り出す
-                        const value = row[column.id]
-
                         // ButtonGroupは共通化のための、このループでは表示しない
                         if (column.id === 'buttonGroup') return null
+
+                        // カラムの内容からrowsのどの値かを取り出す
+                        const value = row[column.id]
 
                         return (
                           <TableCell key={column.id} align={column.align}>
