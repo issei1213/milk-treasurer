@@ -34,16 +34,16 @@ export const Header: FC = memo(() => {
 
   return (
     <Box component="header">
-      <AppBar component="nav" sx={{ background: red[100] }}>
+      <AppBar component="nav" sx={{ background: red[100] }} position="relative">
         <Toolbar>
           <Box component="div" sx={{ flexGrow: 1 }}>
             <Link href="/teams">
               <a>
                 <Image
-                  src="/logo_transparent.png"
+                  src="/header_logo.png"
                   alt=""
-                  width={100}
-                  height={10}
+                  width={150}
+                  height={30}
                   objectFit="contain"
                 />
               </a>
@@ -59,7 +59,7 @@ export const Header: FC = memo(() => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src="/user_for_avatar.png" />
               </IconButton>
             </Tooltip>
             <Menu
