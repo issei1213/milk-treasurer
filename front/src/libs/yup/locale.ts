@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+/* eslint-disable */
 // @ts-nocheck
 
 // NOTE: @ref: https://zenn.dev/longbridge/articles/04f40422501348

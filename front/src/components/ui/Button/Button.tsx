@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from 'react'
 import { memo } from 'react'
-import { ButtonProps as MuiButtonProps } from '@mui/material'
+import { ButtonProps as MuiButtonProps, Box } from '@mui/material'
 import { Button as MuiButton } from '@mui/material'
 import CircularProgress from '@mui/material/CircularProgress'
 import { useTheme } from '@mui/material/styles'
@@ -16,6 +16,25 @@ type ButtonLoadingIconProps = {
   color?: 'primary'
 }
 
+type StartIconWithLoadingProps = {
+  loading: boolean
+  size?: 'small' | 'medium' | 'large'
+  color?: 'primary'
+  icon?: ReactNode
+}
+
+// FIX: 今後使うかもしれないので、一旦保留
+// const getNumberSize = (size: 'large' | 'medium' | 'small'): number => {
+//   switch (size) {
+//     case 'large':
+//       return 24
+//     case 'medium':
+//       return 0
+//     case 'small':
+//       return 1
+//   }
+// }
+
 const ButtonLoadingIcon: FC<ButtonLoadingIconProps> = (props) => {
   const theme = useTheme()
 
@@ -25,15 +44,34 @@ const ButtonLoadingIcon: FC<ButtonLoadingIconProps> = (props) => {
   return <CircularProgress size={size} sx={{ color }} />
 }
 
+const StartIconWithLoading: FC<StartIconWithLoadingProps> = ({
+  size,
+  color,
+  icon,
+  loading,
+}) => {
+  return (
+    <Box display="flex" gap={1}>
+      {loading && <ButtonLoadingIcon size={size} color={color} />}
+      {icon && icon}
+    </Box>
+  )
+}
+
 export const Button: FC<ButtonProps> = memo(
   ({ children, loading = false, ...rest }) => {
     if (loading) {
-      const size = rest.size === 'large' ? 24 : 0
-
       return (
         <MuiButton
           {...rest}
-          startIcon={<ButtonLoadingIcon size={rest.size} color={rest.color} />}
+          startIcon={
+            <StartIconWithLoading
+              loading={loading}
+              size={rest.size}
+              color={rest.color}
+              icon={rest.startIcon}
+            />
+          }
         >
           {children}
         </MuiButton>

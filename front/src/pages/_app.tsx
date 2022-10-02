@@ -1,14 +1,43 @@
-import '../styles/globals.css'
+import { FC, useEffect } from 'react'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
-import type { AppProps } from 'next/app'
-import CssBaseline from '@mui/material/CssBaseline'
+import { getAuth, onAuthStateChanged } from '@firebase/auth'
 import { ThemeProvider } from '@mui/material'
+import CssBaseline from '@mui/material/CssBaseline'
+import { Router, useRouter } from 'next/router'
+import type { AppProps } from 'next/app'
+import { app } from '~/libs/firebase'
 import { theme } from '~/theme'
 
-function MyApp({ Component, pageProps }: AppProps) {
+type AuthInitProps = {
+  router: Router
+}
+
+const AuthInit: FC<AuthInitProps> = () => {
+  const auth = getAuth(app)
+  const { push } = useRouter()
+
+  useEffect(() => {
+    const authChanged = onAuthStateChanged(auth, async (user) => {
+      // ログインしていない場合は、ログイン画面へ遷移
+      if (!user) {
+        await push({
+          pathname: '/login',
+        })
+      }
+    })
+
+    return () => {
+      authChanged()
+    }
+  }, [auth, push])
+
+  return null
+}
+
+function MyApp({ Component, pageProps, router }: AppProps) {
   const cache = new InMemoryCache()
   const client = new ApolloClient({
-    uri: 'http://localhost:5001/milk-treasurer/us-central1/graphql',
+    uri: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
     connectToDevTools: true,
     cache,
   })
@@ -17,6 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ApolloProvider client={client}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <AuthInit router={router} />
         <Component {...pageProps} />
       </ThemeProvider>
     </ApolloProvider>

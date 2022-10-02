@@ -1,5 +1,5 @@
-import type { Components } from '@mui/material'
 import { blue, grey } from '@mui/material/colors'
+import type { Components } from '@mui/material'
 
 export const MuiOutlinedInput: Components['MuiOutlinedInput'] = {
   styleOverrides: {

@@ -16,7 +16,9 @@ jobs:
         run: |
           yarn cache clean
           yarn install --network-concurrency 1
-      - run: yarn lint
-      - run: yarn type:check
-      - run: yarn format:check
-      - run: yarn test
+        working-directory: ./front
+
+      - run: cd ./front && yarn lint
+      - run: cd ./front && yarn type:check
+      - run: cd ./front && yarn format:check
+      - run: cd ./front && yarn test
