@@ -1,18 +1,11 @@
 import { gql } from 'apollo-server-express'
 import { DocumentNode } from 'graphql'
 
-export const typeDefs: DocumentNode = gql`
-  """
-  ミスチル
-  """
+export const userSchema: DocumentNode = gql`
   type User {
     id: String
     name: String
     email: String
-  }
-
-  type Query {
-    users: [User]
   }
 
   input CreateUserInput {
@@ -20,6 +13,9 @@ export const typeDefs: DocumentNode = gql`
     email: String!
   }
 
+  type Query {
+    users: [User]
+  }
 
   type Mutation {
     addTest(text: String!): User
