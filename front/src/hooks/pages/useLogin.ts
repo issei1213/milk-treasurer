@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { app } from '~/libs/firebase'
 import yup from '~/libs/yup/locale'
 import { isFirebaseError } from '~/types/firebase'
-import { setLocalStorage} from "~/utils/localstorage";
+import { setLocalStorage } from '~/utils/localstorage'
 
 export type LoginFormType = {
   email: string
@@ -53,15 +53,16 @@ export const useLogin = () => {
       setStatus('loading')
 
       try {
-        const {user: {uid: userId}} = await signInWithEmailAndPassword(auth, email, password)
+        const {
+          user: { uid: userId },
+        } = await signInWithEmailAndPassword(auth, email, password)
         const token = await auth.currentUser?.getIdToken(true)
 
-        if(!token) return
+        if (!token) return
         await setLocalStorage('token', token)
         await push({
           pathname: `/${userId}`,
         })
-
       } catch (error) {
         if (!(error instanceof Error && isFirebaseError(error))) return
 

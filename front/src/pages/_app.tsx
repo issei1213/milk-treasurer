@@ -5,7 +5,7 @@ import { ThemeProvider } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
 import { Router, useRouter } from 'next/router'
 import type { AppProps } from 'next/app'
-import { removeLocalStorage} from "~/utils/localstorage";
+import { removeLocalStorage } from '~/utils/localstorage'
 import { app } from '~/libs/firebase'
 import { theme } from '~/theme'
 import { useApollo } from '~/libs/apolloClient'

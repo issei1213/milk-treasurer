@@ -1,12 +1,21 @@
 import type { FC } from 'react'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
-import { Typography, Stack, Paper,Table,TableBody ,TableCell, TableContainer, TableHead, TableRow} from '@mui/material'
-import type {NextPage} from 'next'
+import {
+  Typography,
+  Stack,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@mui/material'
+import type { NextPage } from 'next'
 import { BaseLayout } from '~/components/model/layout'
 import { Button } from '~/components/ui/Button'
 import { Head } from '~/components/ui/Head'
 import { useTeams } from '~/hooks/pages/useTeams'
-
 
 type Column = {
   id: 'name' | 'countMember' | 'updatedAt' | 'buttonGroup'
@@ -23,7 +32,7 @@ const COLUMN_LIST: Column[] = [
 ]
 
 const Teams: FC = () => {
-  const {theme, isMobile, isLoading, formatTeamsListData} = useTeams()
+  const { theme, isMobile, isLoading, formatTeamsListData } = useTeams()
 
   return (
     <>
@@ -31,85 +40,81 @@ const Teams: FC = () => {
         <Typography variant={isMobile ? 'h5' : 'h4'} marginBottom="24px">
           クラブチームリスト一覧
         </Typography>
-        {
-          isLoading ? (
-              <div>
-                loading
-              </div>
-          ) : (
-              <Paper sx={{ width: '100%', overflow: 'hidden', padding: '16px' }}>
-                <TableContainer>
-                  <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                      <TableRow>
-                        {COLUMN_LIST.map((column) => (
-                            <TableCell
-                                key={column.id}
-                                align={column.align}
-                                style={{
-                                  minWidth: column.minWidth,
-                                  background: theme.palette.common.white,
-                                }}
-                            >
-                              {column.label}
+        {isLoading ? (
+          <div>loading</div>
+        ) : (
+          <Paper sx={{ width: '100%', overflow: 'hidden', padding: '16px' }}>
+            <TableContainer>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    {COLUMN_LIST.map((column) => (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        style={{
+                          minWidth: column.minWidth,
+                          background: theme.palette.common.white,
+                        }}
+                      >
+                        {column.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {formatTeamsListData?.map((row, index) => {
+                    {
+                      /* 一行文 */
+                    }
+                    return (
+                      <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                        {COLUMN_LIST.map((column) => {
+                          // ButtonGroupは共通化のための、このループでは表示しない
+                          if (column.id === 'buttonGroup') return null
+
+                          // カラムの内容からrowsのどの値かを取り出す
+                          const value = row[column.id]
+
+                          return (
+                            <TableCell key={column.id} align={column.align}>
+                              {value}
                             </TableCell>
-                        ))}
+                          )
+                        })}
+
+                        <TableCell key="buttonGroup">
+                          <Stack
+                            spacing={1}
+                            justifyContent="center"
+                            alignItems="center"
+                          >
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              size="small"
+                              endIcon={<ArrowRightIcon />}
+                            >
+                              会計画面
+                            </Button>
+                            <Button
+                              variant="outlined"
+                              color="primary"
+                              size="small"
+                              endIcon={<ArrowRightIcon />}
+                            >
+                              メンバー一覧
+                            </Button>
+                          </Stack>
+                        </TableCell>
                       </TableRow>
-                    </TableHead>
-                    <TableBody>
-
-                      {formatTeamsListData?.map((row, index) => {
-                        {/* 一行文 */}
-                        return (
-                            <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                              {COLUMN_LIST.map((column) => {
-                                // ButtonGroupは共通化のための、このループでは表示しない
-                                if (column.id === 'buttonGroup') return null
-
-                                // カラムの内容からrowsのどの値かを取り出す
-                                const value = row[column.id]
-
-                                return (
-                                    <TableCell key={column.id} align={column.align}>
-                                      {value}
-                                    </TableCell>
-                                )
-                              })}
-
-                              <TableCell key="buttonGroup">
-                                <Stack
-                                    spacing={1}
-                                    justifyContent="center"
-                                    alignItems="center"
-                                >
-                                  <Button
-                                      variant="contained"
-                                      color="primary"
-                                      size="small"
-                                      endIcon={<ArrowRightIcon />}
-                                  >
-                                    会計画面
-                                  </Button>
-                                  <Button
-                                      variant="outlined"
-                                      color="primary"
-                                      size="small"
-                                      endIcon={<ArrowRightIcon />}
-                                  >
-                                    メンバー一覧
-                                  </Button>
-                                </Stack>
-                              </TableCell>
-                            </TableRow>
-                        )
-                      })}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Paper>
-
-          )
-        }
+                    )
+                  })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
+        )}
       </BaseLayout>
     </>
   )
