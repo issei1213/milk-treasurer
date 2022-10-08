@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react'
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client'
 import { getAuth, onAuthStateChanged } from '@firebase/auth'
 import { ThemeProvider } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -39,7 +39,6 @@ const AuthInit: FC<AuthInitProps> = () => {
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   const apolloClient = useApollo(pageProps)
-  const cache = new InMemoryCache()
 
   return (
     <ApolloProvider client={apolloClient}>
