@@ -43,6 +43,7 @@ function createApolloClient() {
                 },
             },
         }),
+        connectToDevTools: true
     })
 }
 

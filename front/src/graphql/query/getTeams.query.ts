@@ -34,7 +34,10 @@ type Team  = {
 }
 
 
+export type GetTeamsQueryArgs = {
+    user_id: string
+}
+
 export type GetTeamsQuery = {
-    __typename?: 'query_root',
-    teams: {__typename?: 'teams', team: Team}
+    teams: Team[]
 }

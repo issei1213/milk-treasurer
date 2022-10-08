@@ -5,7 +5,7 @@ import { AuthenticationError } from 'apollo-server-express'
 type User = {
   id: string
   name: string
-  owner_teams:　firestore.DocumentReference<Team>[]
+  owner_teams: firestore.DocumentReference<Team>[]
   created_at: Date
   updated_at: Date
 }
