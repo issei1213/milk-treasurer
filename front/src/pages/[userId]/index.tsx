@@ -39,7 +39,7 @@ const Teams: FC = () => {
     <>
       <BaseLayout>
         <Typography variant={isMobile ? 'h5' : 'h4'} marginBottom="24px">
-          クラブチームリスト一覧
+          チームリスト
         </Typography>
 
           <Paper sx={{ width: '100%', overflow: 'hidden', padding: '16px' }}>
