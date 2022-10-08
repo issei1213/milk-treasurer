@@ -96,6 +96,7 @@ export function initializeApollo(initialState = null) {
 // NOTE: getStaciPropsが呼び出す関数
 // 現在のApolloClientのキャッシュ内容をpropsの適用なキーに保存している。この値は後ほど、_app.jsで
 // useApolloをよびだす際にpagePropsとして渡される（Server側とClient側の両方で使われる）
+// @ts-ignore
 export function addApolloState(client, pageProps: AppProps['pageProps']) {
   // @ts-ignore
   if (pageProps?.props) {
