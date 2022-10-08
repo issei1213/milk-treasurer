@@ -11,7 +11,8 @@
     "test": "jest",
     "type:check": "tsc --pretty --noEmit",
     "format": "prettier --write \"./**/*.{js,jsx,ts,tsx}\"",
-    "format:check": "prettier --check \"./**/*.{js,jsx,ts,tsx}\""
+    "format:check": "prettier --check \"./**/*.{js,jsx,ts,tsx}\"",
+    "ci": "yarn lint:check && yarn type:check && yarn format:check"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
