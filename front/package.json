@@ -6,11 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint --fix",
+    "lint:check": "next lint",
     "test": "jest",
     "type:check": "tsc --pretty --noEmit",
     "format": "prettier --write \"./**/*.{js,jsx,ts,tsx}\"",
-    "format:check": "prettier --check \"./**/*.{js,jsx,ts,tsx}\""
+    "format:check": "prettier --check \"./**/*.{js,jsx,ts,tsx}\"",
+    "ci": "yarn lint:check && yarn type:check && yarn format:check"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
@@ -19,6 +21,7 @@
     "@hookform/resolvers": "^2.9.8",
     "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.7",
+    "dayjs": "^1.11.5",
     "firebase": "^9.10.0",
     "graphql": "^16.6.0",
     "next": "12.3.1",

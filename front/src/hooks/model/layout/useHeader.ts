@@ -10,6 +10,7 @@ export const useHeader = () => {
 
   const logOut = useCallback(async () => {
     try {
+      localStorage.removeItem('token')
       await signOut(auth)
       await push('/login')
     } catch (error) {
