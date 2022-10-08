@@ -2,8 +2,10 @@ import { gql } from 'apollo-server-express'
 import { DocumentNode } from 'graphql'
 
 export const teamSchema: DocumentNode = gql`
-  scalar Timestamp
-
+  extend type Query {
+    teams(user_id: String!): [Team]
+  }
+  
   type TeamMembers {
     id: String
     name: String
@@ -19,7 +21,4 @@ export const teamSchema: DocumentNode = gql`
     created_at: Timestamp
   }
 
-  type Query {
-    teams: [Team]
-  }
 `
