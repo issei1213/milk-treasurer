@@ -5,7 +5,7 @@ import { ThemeProvider } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
 import { Router, useRouter } from 'next/router'
 import type { AppProps } from 'next/app'
-
+import { removeLocalStorage} from "~/utils/localstorage";
 import { app } from '~/libs/firebase'
 import { theme } from '~/theme'
 import { useApollo } from '~/libs/apolloClient'
@@ -22,7 +22,7 @@ const AuthInit: FC<AuthInitProps> = () => {
     const authChanged = onAuthStateChanged(auth, async (user) => {
       // ログインしていない場合は、ログイン画面へ遷移
       if (!user) {
-        localStorage.removeItem('token')
+        await removeLocalStorage('token')
         await push({
           pathname: '/login',
         })
