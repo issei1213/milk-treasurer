@@ -1,13 +1,13 @@
+import { useQuery } from '@apollo/client'
 import { useMediaQuery, useTheme } from '@mui/material'
 import { useRouter } from 'next/router'
-import { useQuery } from '@apollo/client'
 import {
   GET_TEAMS,
   GetTeamsQuery,
   GetTeamsQueryArgs,
 } from '~/graphql/query/getTeams.query'
+import { formatYYYYMMDDHHmm } from '~/utils/dayjs'
 import { isString } from '~/utils/isString'
-import {formatYYYYMMDDHHmm} from '~/utils/dayjs'
 
 export const useTeams = () => {
   const theme = useTheme()

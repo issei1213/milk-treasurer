@@ -5,10 +5,10 @@ import { ThemeProvider } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
 import { Router, useRouter } from 'next/router'
 import type { AppProps } from 'next/app'
-import { removeLocalStorage } from '~/utils/localstorage'
+import { useApollo } from '~/libs/apolloClient'
 import { app } from '~/libs/firebase'
 import { theme } from '~/theme'
-import { useApollo } from '~/libs/apolloClient'
+import { removeLocalStorage } from '~/utils/localstorage'
 
 type AuthInitProps = {
   router: Router

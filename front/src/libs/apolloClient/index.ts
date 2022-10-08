@@ -1,4 +1,5 @@
 // INFO: https://github.com/vercel/next.js/blob/canary/examples/with-apollo/lib/apolloClient.js
+/* eslint-disable */
 import { useMemo } from 'react'
 import {
   ApolloClient,
