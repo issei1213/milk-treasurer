@@ -7,6 +7,7 @@ import {
   GetTeamsQueryArgs,
 } from '~/graphql/query/getTeams.query'
 import { isString } from '~/utils/isString'
+import {formatYYYYMMDDHHmm} from '~/utils/dayjs'
 
 export const useTeams = () => {
   const theme = useTheme()
@@ -26,7 +27,7 @@ export const useTeams = () => {
     ({ id, name, updated_at, members }) => ({
       id,
       name,
-      updatedAt: updated_at,
+      updatedAt: formatYYYYMMDDHHmm(updated_at),
       countMember: members.length,
     }),
   )

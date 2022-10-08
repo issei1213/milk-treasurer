@@ -10,6 +10,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Skeleton
 } from '@mui/material'
 import type { NextPage } from 'next'
 import { BaseLayout } from '~/components/model/layout'
@@ -40,9 +41,7 @@ const Teams: FC = () => {
         <Typography variant={isMobile ? 'h5' : 'h4'} marginBottom="24px">
           クラブチームリスト一覧
         </Typography>
-        {isLoading ? (
-          <div>loading</div>
-        ) : (
+
           <Paper sx={{ width: '100%', overflow: 'hidden', padding: '16px' }}>
             <TableContainer>
               <Table stickyHeader aria-label="sticky table">
@@ -63,58 +62,66 @@ const Teams: FC = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {formatTeamsListData?.map((row, index) => {
-                    {
-                      /* 一行文 */
-                    }
-                    return (
-                      <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                        {COLUMN_LIST.map((column) => {
-                          // ButtonGroupは共通化のための、このループでは表示しない
-                          if (column.id === 'buttonGroup') return null
+                  {
+                    isLoading ? (
+                        [...Array(2)].map((_, index) => (
+                            <TableRow key={index}>
+                              <TableCell><Skeleton animation="wave" height={60} /></TableCell>
+                              <TableCell><Skeleton animation="wave" height={60} /></TableCell>
+                              <TableCell><Skeleton animation="wave"  height={60} /></TableCell>
+                              <TableCell><Skeleton animation="wave"  height={60} /></TableCell>
+                            </TableRow>
+                        ))
+                    ) : (
+                        formatTeamsListData?.map((row, index) => (
+                              // 一行文
+                              <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                                {COLUMN_LIST.map((column) => {
+                                  // ButtonGroupは共通化のための、このループでは表示しない
+                                  if (column.id === 'buttonGroup') return null
 
-                          // カラムの内容からrowsのどの値かを取り出す
-                          const value = row[column.id]
+                                  // カラムの内容からrowsのどの値かを取り出す
+                                  const value = row[column.id]
 
-                          return (
-                            <TableCell key={column.id} align={column.align}>
-                              {value}
-                            </TableCell>
-                          )
-                        })}
+                                  return (
+                                      <TableCell key={column.id} align={column.align}>
+                                        {value}
+                                      </TableCell>
+                                  )
+                                })}
 
-                        <TableCell key="buttonGroup">
-                          <Stack
-                            spacing={1}
-                            justifyContent="center"
-                            alignItems="center"
-                          >
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              size="small"
-                              endIcon={<ArrowRightIcon />}
-                            >
-                              会計画面
-                            </Button>
-                            <Button
-                              variant="outlined"
-                              color="primary"
-                              size="small"
-                              endIcon={<ArrowRightIcon />}
-                            >
-                              メンバー一覧
-                            </Button>
-                          </Stack>
-                        </TableCell>
-                      </TableRow>
+                                <TableCell key="buttonGroup">
+                                  <Stack
+                                      spacing={1}
+                                      justifyContent="center"
+                                      alignItems="center"
+                                  >
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        size="small"
+                                        endIcon={<ArrowRightIcon />}
+                                    >
+                                      会計画面
+                                    </Button>
+                                    <Button
+                                        variant="outlined"
+                                        color="primary"
+                                        size="small"
+                                        endIcon={<ArrowRightIcon />}
+                                    >
+                                      メンバー一覧
+                                    </Button>
+                                  </Stack>
+                                </TableCell>
+                              </TableRow>
+                          ))
                     )
-                  })}
+                  }
                 </TableBody>
               </Table>
             </TableContainer>
           </Paper>
-        )}
       </BaseLayout>
     </>
   )
