@@ -53,6 +53,8 @@ export const useLogin = () => {
 
       try {
         await signInWithEmailAndPassword(auth, email, password)
+        const token = await auth.currentUser?.getIdToken(true)
+        localStorage.setItem('token', token ?? '')
         await push({
           pathname: '/teams',
         })
