@@ -134,7 +134,7 @@ const Teams: FC = () => {
 const Index: NextPage = () => {
   return (
     <>
-      <Head title="クラブチームリスト" />
+      <Head title="チームリスト" />
       <Teams />
     </>
   )

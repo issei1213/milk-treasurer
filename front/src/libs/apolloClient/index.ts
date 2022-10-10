@@ -53,7 +53,7 @@ function createApolloClient() {
         },
       },
     }),
-    connectToDevTools: true,
+    connectToDevTools: process.env.NODE_ENV === 'production',
   })
 }
 
