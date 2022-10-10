@@ -12,10 +12,10 @@ export const useHeader = () => {
     try {
       localStorage.removeItem('token')
       await signOut(auth)
-      await push({pathname: '/login'})
+      // await push({pathname: '/login'})
 
       // NOTE: ログアウト→ログインでなぜかログインできないため、一旦リロードで暫定対応
-      reload()
+      // reload()
     } catch (error) {
       console.error(error)
     }

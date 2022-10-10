@@ -66,12 +66,7 @@ export const useLogin = () => {
 
         // NOTE: URLが変更されない現象が起きているため、暫定対応
         //  @ref: https://github.com/vercel/next.js/issues/37362#issuecomment-1219628894
-        await push({
-          pathname: `/${userId}`,
-        },
-            undefined,
-            {shallow: true}
-        )
+        await push(`/${userId}`)
       } catch (error) {
         if (!(error instanceof Error && isFirebaseError(error))) return
 
