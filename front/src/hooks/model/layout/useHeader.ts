@@ -5,17 +5,14 @@ import { app } from '~/libs/firebase'
 
 export const useHeader = () => {
   const auth = getAuth(app)
-  const { push, reload } = useRouter()
+  const { push } = useRouter()
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
 
   const logOut = useCallback(async () => {
     try {
       localStorage.removeItem('token')
       await signOut(auth)
-      // await push({pathname: '/login'})
-
-      // NOTE: ログアウト→ログインでなぜかログインできないため、一旦リロードで暫定対応
-      // reload()
+      await push({pathname: '/login'})
     } catch (error) {
       console.error(error)
     }
