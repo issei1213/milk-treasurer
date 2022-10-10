@@ -33,7 +33,7 @@ const loginFormSchema = yup
 export const useLogin = () => {
   const [isShowPassword, setIsShowPassword] = useState(false)
   const [status, setStatus] = useState<StatusType>(undefined)
-  const { push } = useRouter()
+  const { replace } = useRouter()
   const [toastState, setToastState] = useState<SnackStateType>({
     isOpen: false,
     type: 'error',
@@ -60,9 +60,11 @@ export const useLogin = () => {
 
         if (!token) return
         await setLocalStorage('token', token)
-        await push({
+
+        await replace({
           pathname: `/${userId}`,
         })
+
       } catch (error) {
         if (!(error instanceof Error && isFirebaseError(error))) return
 
@@ -94,7 +96,7 @@ export const useLogin = () => {
         setStatus(undefined)
       }
     },
-    [auth, push],
+    [auth, replace],
   )
 
   const onCloseToast = useCallback(() => {

@@ -14,7 +14,11 @@ import {
 } from 'graphql-scalars'
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccountKey),
+  credential: admin.credential.cert({
+    clientEmail: serviceAccountKey.client_email,
+    privateKey: serviceAccountKey.private_key,
+    projectId: serviceAccountKey.project_id,
+  }),
 })
 admin.firestore().settings({ ignoreUndefinedProperties: true })
 
@@ -45,7 +49,16 @@ const server = new ApolloServer({
 })
 
 server.start().then(() => {
-  server.applyMiddleware({ app, path: '/' })
-})
+  server.applyMiddleware({
+    app,
+    path: '/' ,
+    cors: {
+      origin: [process.env.FRONT_URL ?? ''],
+      credentials: true
+    },
+  }
+  )})
 
-exports.graphql = functions.https.onRequest(app)
+exports.graphql = functions
+    .region('asia-northeast1')
+    .https.onRequest(app)
