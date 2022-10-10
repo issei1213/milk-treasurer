@@ -61,6 +61,8 @@ export const useLogin = () => {
         if (!token) return
         await setLocalStorage('token', token)
 
+        console.log(userId)
+
 
         // NOTE: URLが変更されない現象が起きているため、暫定対応
         //  @ref: https://github.com/vercel/next.js/issues/37362#issuecomment-1219628894
