@@ -30,7 +30,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 const httpLink = new HttpLink({
   uri: process.env.NEXT_PUBLIC_API_URL, // Server URL (must be absolute)
-  credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
+  // credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
   headers: {
     authorization:
       typeof window !== 'undefined'
