@@ -33,7 +33,7 @@ const loginFormSchema = yup
 export const useLogin = () => {
   const [isShowPassword, setIsShowPassword] = useState(false)
   const [status, setStatus] = useState<StatusType>(undefined)
-  const { push } = useRouter()
+  const { push, replace } = useRouter()
   const [toastState, setToastState] = useState<SnackStateType>({
     isOpen: false,
     type: 'error',
@@ -48,8 +48,7 @@ export const useLogin = () => {
   })
   const auth = getAuth(app)
 
-  const onSubmit: SubmitHandler<LoginFormType> = useCallback(
-    async ({ email, password }) => {
+  const onSubmit: SubmitHandler<LoginFormType> = async ({ email, password }) => {
       setStatus('loading')
 
       try {
@@ -97,9 +96,8 @@ export const useLogin = () => {
         // 成功・失敗にかかわらずローディング処理を解除
         setStatus(undefined)
       }
-    },
-    [auth, push],
-  )
+    }
+
 
   const onCloseToast = useCallback(() => {
     setToastState({
