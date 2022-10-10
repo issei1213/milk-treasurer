@@ -64,7 +64,6 @@ export const useLogin = () => {
         await replace({
           pathname: `/${userId}`,
         })
-
       } catch (error) {
         if (!(error instanceof Error && isFirebaseError(error))) return
 
