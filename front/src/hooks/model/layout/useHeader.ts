@@ -7,7 +7,7 @@ import { removeLocalStorage } from '~/utils/localstorage'
 
 export const useHeader = () => {
   const auth = getAuth(app)
-  const { push } = useRouter()
+  const { push, query } = useRouter()
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
 
   const logOut = useCallback(async () => {
@@ -33,10 +33,17 @@ export const useHeader = () => {
     setAnchorElUser(null)
   }, [])
 
+  const onClickLogo = useCallback(async () => {
+    await push({
+      pathname: `/${query.userId}`,
+    })
+  }, [push])
+
   return {
     logOut,
     anchorElUser,
     handleOpenUserMenu,
     handleCloseUserMenu,
+    onClickLogo,
   } as const
 }

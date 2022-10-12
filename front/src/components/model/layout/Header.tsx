@@ -10,17 +10,22 @@ import {
   Toolbar,
   Tooltip,
   Typography,
+  Link,
 } from '@mui/material'
 import { red } from '@mui/material/colors'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useHeader } from '~/hooks/model/layout/useHeader'
 
 const NAV_LIST = ['']
 
 export const Header: FC = memo(() => {
-  const { logOut, anchorElUser, handleOpenUserMenu, handleCloseUserMenu } =
-    useHeader()
+  const {
+    logOut,
+    anchorElUser,
+    handleOpenUserMenu,
+    handleCloseUserMenu,
+    onClickLogo,
+  } = useHeader()
 
   const userMenuList = [
     {
@@ -37,16 +42,15 @@ export const Header: FC = memo(() => {
       <AppBar component="nav" sx={{ background: red[100] }} position="relative">
         <Toolbar>
           <Box component="div" sx={{ flexGrow: 1 }}>
-            <Link href="/teams">
-              <a>
-                <Image
-                  src="/header_logo.png"
-                  alt=""
-                  width={150}
-                  height={30}
-                  objectFit="contain"
-                />
-              </a>
+            <Link>
+              <Image
+                src="/header_logo.png"
+                alt=""
+                width={150}
+                height={30}
+                objectFit="contain"
+                onClick={onClickLogo}
+              />
             </Link>
           </Box>
           <Box>
