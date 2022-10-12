@@ -1,7 +1,9 @@
 import { useCallback, useState, MouseEvent } from 'react'
 import { getAuth, signOut } from '@firebase/auth'
 import { useRouter } from 'next/router'
+import { toastStateVar } from '~/graphql/cache'
 import { app } from '~/libs/firebase'
+import { removeLocalStorage } from '~/utils/localstorage'
 
 export const useHeader = () => {
   const auth = getAuth(app)
@@ -10,9 +12,14 @@ export const useHeader = () => {
 
   const logOut = useCallback(async () => {
     try {
-      localStorage.removeItem('token')
+      await removeLocalStorage('token')
       await signOut(auth)
-      await push({pathname: '/login'})
+      await push({ pathname: '/login' })
+      toastStateVar({
+        isOpen: true,
+        type: 'success',
+        message: 'ログアウトしました',
+      })
     } catch (error) {
       console.error(error)
     }

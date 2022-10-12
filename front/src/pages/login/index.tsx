@@ -5,7 +5,6 @@ import type { NextPage } from 'next'
 import { LoginForm } from '~/components/model/auth'
 import { Button } from '~/components/ui/Button'
 import { Head } from '~/components/ui/Head'
-import { Toast } from '~/components/ui/Toast'
 import { useLogin } from '~/hooks/pages/useLogin'
 
 const Login: FC = () => {
@@ -16,8 +15,6 @@ const Login: FC = () => {
     isShowPassword,
     setIsShowPassword,
     status,
-    toastState,
-    onCloseToast,
   } = useLogin()
 
   return (
@@ -89,13 +86,6 @@ const Login: FC = () => {
           </Box>
         </Box>
       </Container>
-
-      <Toast
-        open={toastState.isOpen}
-        onClose={onCloseToast}
-        message={toastState.message}
-        type={toastState.type}
-      />
     </>
   )
 }

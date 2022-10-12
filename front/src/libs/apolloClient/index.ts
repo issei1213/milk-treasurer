@@ -13,37 +13,49 @@ import { concatPagination } from '@apollo/client/utilities'
 import merge from 'deepmerge'
 import isEqual from 'lodash/isEqual'
 import type { AppProps } from 'next/app'
+import { setContext } from '@apollo/client/link/context'
+import {
+  apiGraphQLErrorsVar,
+  apiNetworkErrorVar,
+  apiOperationVar,
+} from '~/graphql/cache'
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors)
-    graphQLErrors.forEach(({ message, locations, path }) =>
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-      ),
-    )
-  if (networkError) console.log(`[Network error]: ${networkError}`)
+const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
+  if (graphQLErrors) {
+    apiGraphQLErrorsVar(graphQLErrors)
+  }
+  if (networkError) {
+    apiNetworkErrorVar(networkError)
+  }
+  if (operation) {
+    apiOperationVar(operation)
+  }
 })
 
 const httpLink = new HttpLink({
   uri: process.env.NEXT_PUBLIC_API_URL, // Server URL (must be absolute)
   // credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
-  headers: {
-    authorization:
-      typeof window !== 'undefined'
-        ? `Bearer ${localStorage.getItem('token')}`
-        : '',
-  },
+})
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('token')
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  }
 })
 
 function createApolloClient() {
   return new ApolloClient({
     // SSR時のみTrue
     ssrMode: typeof window === 'undefined',
-    link: from([errorLink, httpLink]),
+    link: from([authLink, errorLink, httpLink]),
     cache: new InMemoryCache({
       typePolicies: {
         Query: {
